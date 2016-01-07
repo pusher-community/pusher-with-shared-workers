@@ -32,4 +32,4 @@ Press `Connect` to connect to the Shared Worker, which will connect to Pusher. I
 
 Open a new tab and press `Connect` again, and you should see in your debug console that no new connection has been initialized, as both web pages are sharing a connection.
 
-In the event creator in the debug console page, send an event called `my_event` on a channel called `test_channel` which whatever data you want. You should see that the message is appearing on both tabs, while using the same connection. 
+In the event creator in the debug console page, send an event called `my_event` on a channel called `test_channel` with whatever data you want. You should see that the message is appearing on both tabs, while using the same connection.
