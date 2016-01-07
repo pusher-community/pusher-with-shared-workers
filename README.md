@@ -6,7 +6,17 @@ While browser compatibility may be an issue, this adds the possibility of cuttin
 
 In this repo is a quick example that lets the user 'connect' and 'disconnect' to the worker, which listens to Pusher messages and relays them to the main thread. The main thread then shows it on the web page.
 
-## To Run
+## Setting Up Pusher
+
+Go to our [pusher-websocket-js-iso](https://github.com/pusher-community/pusher-websocket-js-iso) library, and download `dist/worker/pusher.js`, our build specifically for browser workers.
+
+To load in the library, simply call in your worker script:
+
+```js
+importScripts("path/to/pusher.js");
+```
+
+## To Run This App
 
 Open up your debug console at <http://dashboard.pusher.com> to check everything is in order.
 
