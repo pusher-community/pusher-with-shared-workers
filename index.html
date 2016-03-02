@@ -8,50 +8,36 @@
   <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
 </head>
 <body>
-  <button id="connect">Connect</button>
-
-  <button id="disconnect">Disconnect</button>
 
   <div>
     <p>Message: <span id="message"></span></p>
   </div>
-  
+
   <script>
 
-  var worker;
-
-  function initializeWorker(){
-    // Start our new worker
-    worker = new SharedWorker("./shared_worker.js");
-
-
-    // Whenever we get a message, set the #message element to the data brought in
-    worker.port.onmessage = function(evt){
-      console.log(evt.data);
-      $('#message').text(JSON.stringify(evt.data));
-    };
-
-    // If we get an error, log it out and close the worker.
-    worker.onerror = function(err){
-      console.log(err.message);
-      worker.port.close();
-    }
-
-    // Start the worker.
-    worker.port.start();
+  if (typeof(window.SharedWorker) === 'undefined') {
+    throw("Your browser does not support SharedWorkers")
   }
 
-  function closeWorker(){
-    if (!worker) return;
-    console.log("closing worker...");
-    // Send a disconnect message to the worker
-    worker.port.postMessage("disconnect");
+  // Start our new worker
+  var worker = new SharedWorker("./shared_worker.js");
+
+  // Whenever we get a message, set the #message element to the data brought in
+  worker.port.onmessage = function(evt){
+    console.log(evt.data);
+    $('#message').text(JSON.stringify(evt.data));
+  };
+
+  // If we get an error, log it out and close the worker.
+  worker.onerror = function(err){
+    console.log(err.message);
+    worker.port.close();
   }
 
-  $('#connect').click(initializeWorker);
-  $('#disconnect').click(closeWorker);
+  // Start the worker.
+  worker.port.start();
 
   </script>
-  
+
 </body>
 </html>
